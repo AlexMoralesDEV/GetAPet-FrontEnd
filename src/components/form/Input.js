@@ -1,6 +1,5 @@
 import styles from './Input.module.css'
 
-
 function Input({ type, text, name, placeholder, handleOnChange, value, mutiple }) {
     return (
         <div className={styles.form_control}>
