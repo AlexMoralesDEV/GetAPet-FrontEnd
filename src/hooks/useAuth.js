@@ -7,7 +7,7 @@ export default function useAuth(){
 
     async function register(user){
         try{
-            const data = await api.post('/users/register', user)
+            const data = await api.post('/users/registrar', user)
             .then(response => {
                 return response.data;
             })
@@ -17,5 +17,7 @@ export default function useAuth(){
             console.log(err)
         }
     }
+
+    return { register }
 
 }
