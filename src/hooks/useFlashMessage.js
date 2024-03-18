@@ -8,7 +8,7 @@ export default function useFlashMessage(){
             type: type
         })
 
-        return { setFlashMessage }
     }
-
+    
+    return { setFlashMessage }
 }
