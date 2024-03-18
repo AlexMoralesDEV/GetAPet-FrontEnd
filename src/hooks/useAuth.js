@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom'
 import useFlashMessage from './useFlashMessage'
 
 export default function useAuth() {
+    
+    const { setFlashMessage } = useFlashMessage();
 
     async function register(user) {
 
-        const { setFlashMessage } = useFlashMessage();
 
         let msgText = 'O usuário foi cadastrado com sucesso!'
         let msgType = 'success'
@@ -20,10 +21,10 @@ export default function useAuth() {
                 })
 
             console.log(data);
-        } catch (err) {
-            console.log(err)
-            let msgText = error.response.data.message
-            let msgType = 'error'
+        } catch (error) {
+            console.log(error)
+            msgText = error.response.data.message
+            msgType = 'error'
         }
 
         setFlashMessage(msgText, msgType)
