@@ -15,7 +15,7 @@ function Register() {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
         register(user);
     }
@@ -29,6 +29,13 @@ function Register() {
                     type="text"
                     name="name"
                     placeholder="Digite o seu nome"
+                    handleOnChange={handleChange}
+                />
+                <Input
+                    text="Telefone"
+                    type="text"
+                    name="phone"
+                    placeholder="Digite o seu telefone"
                     handleOnChange={handleChange}
                 />
                 <Input
