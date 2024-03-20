@@ -13,7 +13,7 @@ export default function useAuth() {
     useEffect(() => {
 
         const token = localStorage.getItem('token');
-        if(token){
+        if (token) {
             api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
             setAuthenticated(true)
         }
@@ -42,12 +42,33 @@ export default function useAuth() {
         setFlashMessage(msgText, msgType)
     }
 
+    async function login(user) {
+        let msgText = 'O usuário entrou com sucesso!'
+        let msgType = 'success'
+
+        try {
+            const data = await api.post('/users/login', user)
+            .then( response => {
+                return response.data;
+            });
+
+            await authUser(data);
+        } catch (error) {
+            console.log(error)
+            msgText = error.response.data.message
+            msgType = 'error'
+        }
+
+        setFlashMessage(msgText, msgType)
+    }
+
+
     async function authUser(data) {
         setAuthenticated(true);
         localStorage.setItem('token', JSON.stringify(data.token));
-        navigate('/home');
+        navigate('/');
     }
 
-    return { authenticated, register }
+    return { authenticated, register, login }
 
 }

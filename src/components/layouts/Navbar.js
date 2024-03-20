@@ -21,7 +21,7 @@ function Navbar() {
                     <Link to='/'> Adotar </Link>
                 </li>
 
-                {authenticated ? (<p> Logado </p>) : (
+                {authenticated ? (<li>Sair</li>) : (
                     <>
                         <li>
                             <Link to='/login'> Entrar </Link>
