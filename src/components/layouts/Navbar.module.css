@@ -30,7 +30,7 @@
     color: #fff;
 }
 
-.navbar li:hover > a{
+.navbar li:hover, .navbar li a:hover{
     color: #16479d;
     transition: 0.4s all;
 }

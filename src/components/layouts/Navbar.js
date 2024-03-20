@@ -8,7 +8,7 @@ import { Context } from '../../context/UserContext'
 
 function Navbar() {
 
-    const { authenticated } = useContext(Context);
+    const { authenticated, sair,  } = useContext(Context);
 
     return (
         <nav className={styles.navbar} >
@@ -21,7 +21,7 @@ function Navbar() {
                     <Link to='/'> Adotar </Link>
                 </li>
 
-                {authenticated ? (<li>Sair</li>) : (
+                {authenticated ? (<li onClick={() => { sair() }}>Sair</li>) : (
                     <>
                         <li>
                             <Link to='/login'> Entrar </Link>

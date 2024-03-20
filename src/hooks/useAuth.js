@@ -69,6 +69,19 @@ export default function useAuth() {
         navigate('/');
     }
 
-    return { authenticated, register, login }
+    function sair(){
+        let msgText = 'O usuário saiu com sucesso!'
+        let msgType = 'success'
+        
+        localStorage.removeItem('token');
+        api.defaults.headers.Authorization = undefined;
+        
+        navigate('/login');
+
+        setAuthenticated(false);
+        setFlashMessage(msgText, msgType)
+    }
+
+    return { authenticated, register, login, sair }
 
 }
