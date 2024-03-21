@@ -7,6 +7,7 @@ import Navbar from './components/layouts/Navbar'
 import Footer from './components/layouts/Footer'
 import Container from './components/layouts/Container'
 import Message from './components/layouts/Message'
+import Profile from './components/pages/User/Profile'
 
 import { UserProvider } from './context/UserContext'
 
@@ -21,7 +22,7 @@ function App() {
             <Route path='/login' element={< Login />} />
             <Route path='/register' element={< Register />} />
             <Route path='/' element={< Home />} />
-
+            <Route path='/user/profile' element={< Profile />} />
           </Routes>
         </Container>
         <Footer />
