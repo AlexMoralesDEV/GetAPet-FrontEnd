@@ -48,9 +48,9 @@ export default function useAuth() {
 
         try {
             const data = await api.post('/users/login', user)
-            .then( response => {
-                return response.data;
-            });
+                .then(response => {
+                    return response.data;
+                });
 
             await authUser(data);
         } catch (error) {
@@ -62,20 +62,19 @@ export default function useAuth() {
         setFlashMessage(msgText, msgType)
     }
 
-
     async function authUser(data) {
         setAuthenticated(true);
         localStorage.setItem('token', JSON.stringify(data.token));
         navigate('/');
     }
 
-    function sair(){
+    function sair() {
         let msgText = 'O usuário saiu com sucesso!'
         let msgType = 'success'
-        
+
         localStorage.removeItem('token');
         api.defaults.headers.Authorization = undefined;
-        
+
         navigate('/login');
 
         setAuthenticated(false);
