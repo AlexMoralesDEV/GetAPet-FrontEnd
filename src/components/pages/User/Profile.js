@@ -6,6 +6,7 @@ import formStyles from '../../form/Form.module.css'
 import styles from './Profile.module.css'
 
 import Input from '../../form/Input'
+import RoundedImage from '../../layouts/RoundedImage'
 
 function Profile() {
     const [user, setUser] = useState({});
@@ -74,7 +75,7 @@ function Profile() {
             <div className={styles.profile_container}>
                 <h1>Perfil</h1>
                 {(user.img || preview) && (
-                    <img
+                    <RoundedImage
                         src={
                             preview
                                 ? URL.createObjectURL(preview)
