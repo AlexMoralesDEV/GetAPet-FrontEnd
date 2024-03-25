@@ -8,6 +8,7 @@ import Footer from './components/layouts/Footer'
 import Container from './components/layouts/Container'
 import Message from './components/layouts/Message'
 import Profile from './components/pages/User/Profile'
+import MyPets from './components/pages/Pets/MyPets'
 
 import { UserProvider } from './context/UserContext'
 
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path='/login' element={< Login />} />
             <Route path='/register' element={< Register />} />
+            <Route path='/pets/mypets' element={< MyPets />} />
             <Route path='/' element={< Home />} />
             <Route path='/user/profile' element={< Profile />} />
           </Routes>
