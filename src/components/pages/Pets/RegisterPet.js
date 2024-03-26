@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+
 import api from '../../../utils/api'
 import useFlashMessage from '../../../hooks/useFlashMessage'
 import Input from '../../form/Input'
+import Select from '../../form/Select'
+
 import formStyle from '../../form/Form.module.css'
 
 function RegisterPet() {
@@ -9,20 +12,12 @@ function RegisterPet() {
     const [token] = useState(localStorage.getItem('token') || '')
     const [preview, setPreview] = useState();
     const { setFlashMessage } = useFlashMessage()
-
-    useEffect(() => {
-        api.get('/users/checkUser', {
-            headers: {
-                Authorization: `Bearer ${JSON.parse(token)}`
-            }
-        })
-
-    }, [token]);
+    const colors = ['Branco', 'Preto', 'Marrom', 'Cinza', 'Caramelo']
 
     async function cadastrarPet(formData) {
         let msgText = 'Pet Cadastrado com Sucesso!'
         let msgType = 'success'
-        
+
         try {
 
             const petCadastrado = await api.post('/pets/create', formData, {
@@ -46,21 +41,32 @@ function RegisterPet() {
         setPet({ ...pet, [e.target.name]: e.target.value })
     }
 
-    function handleImageChange(e){
-        setPreview(e.target.files[0])
-        setPet({ ...pet, [e.target.name]: [...e.target.files] })
+    function handleImageChange(e) {
+        setPreview([...e.target.files])
+        setPet({ ...pet, images: [...e.target.files] })
+    }
+
+    function handleColorChange(e) {
+        setPet({ ...pet, [e.target.name]: e.target.options[e.target.selectedIndex].text })
     }
 
     async function handleSubmit(e) {
         e.preventDefault()
 
         const formData = new FormData();
-        
-        const petFormData = await Object.keys(pet).forEach((key) => {
-            formData.append(key, pet[key])
-        })
+
+        for (const key in pet) {
+            if (key === 'images') {
+                for (let i = 0; i < pet[key].length; i++) {
+                    formData.append(`images`, pet[key][i])
+                }
+            } else {
+                formData.append(key, pet[key])
+            }
+        }
 
         await cadastrarPet(formData)
+        console.log(formData);
     }
 
     return (
@@ -70,8 +76,8 @@ function RegisterPet() {
                 <Input name='name' type='text' text='Nome' placeholder='Digite o nome do pet' handleOnChange={handleChange} />
                 <Input name='age' type='number' text='Idade' placeholder='Digite a idade do pet' handleOnChange={handleChange} />
                 <Input name='weight' type='number' text='Peso' placeholder='Digite o peso do pet' handleOnChange={handleChange} />
-                <Input name='color' type='text' text='Cor' placeholder='Digite a cor do pet' handleOnChange={handleChange} />
-                <Input name='images' type='file' text='Imagens' handleOnChange={handleImageChange} mutiple={true} />
+                <Select name='color' type='text' options={colors} text='Cor' handleOnChange={handleColorChange} />
+                <Input name='images' type='file' text='Imagens' handleOnChange={handleImageChange} multiple={true} />
                 <input type='submit' value='Cadastrar Pet' />
             </form>
         </section>
