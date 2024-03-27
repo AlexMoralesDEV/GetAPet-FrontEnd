@@ -1,9 +1,23 @@
+import api from '../../../utils/api'
+
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 function MyPets() {
     const [pets, setPets] = useState([])
+    const [token] = useState(localStorage.getItem('token') || '')
 
+    useEffect( () => {
+        const allPets = api.get('/pets/mypets', {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`
+            }
+        })
+        .then((response) => {
+            setPets(response.data.mypets);
+        })
+
+    }, [token])
 
 
     return (
@@ -13,12 +27,13 @@ function MyPets() {
                 <Link to='/pets/create'>Cadastrar pet!</Link>
             </div>
             <div>
-                {pets.length > 0 && (
-                    <p>Meus pets cadastrados</p>
-                )}
-                {pets.length == 0 && (
-                    <p>Não há pets cadastrados!</p>
-                )}
+                {
+                pets.length > 0 
+                ? pets.map((pet, key) => (
+                    <p key={`${pet.name} ${key}`}> {pet.name} </p>
+                )) 
+                : (<p> Não há pets cadastrados </p>)
+                }
             </div>
         </section>
     )
