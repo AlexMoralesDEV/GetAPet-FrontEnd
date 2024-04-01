@@ -1,0 +1,31 @@
+.section_flex{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.pet_item{
+    min-width: 250px;
+    height: 300px;
+    background-color: transparent;
+    border: 1px solid #ffd400;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.pet_item img{
+    position: relative;
+    top: -30px;
+}
+
+.pet_item span{
+    font-weight: bold;
+    color: #16479d;
+}
