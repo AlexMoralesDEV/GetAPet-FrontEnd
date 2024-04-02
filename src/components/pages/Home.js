@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import api from '../../utils/api'
 import RoundedImage from '../layouts/RoundedImage'
@@ -24,7 +25,9 @@ function Home(){
                 <div className={styles.pet_item}>
                     <RoundedImage width='px75' alt={pet.name} src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}/>
                     <h1>{pet.name}</h1>
+                    <p><span>Peso: </span>{pet.weight}kg</p>
                     <p><span>Dono: </span>{pet.user.name}</p>
+                    <Link to={`/pets/${pet._id}`}>Mais informações</Link>
                 </div>
             ))}
         </section>
