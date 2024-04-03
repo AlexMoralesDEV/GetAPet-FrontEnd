@@ -27,7 +27,9 @@ function Home(){
                     <h1>{pet.name}</h1>
                     <p><span>Peso: </span>{pet.weight}kg</p>
                     <p><span>Dono: </span>{pet.user.name}</p>
-                    <Link to={`/pets/${pet._id}`}>Mais informações</Link>
+                    {pet.avaiable ? (
+                        <Link to={`/pets/${pet._id}`}>Mais informações</Link>
+                    ) : <p class={styles.p_footer}> Pet já foi adotado </p>}
                 </div>
             ))}
         </section>

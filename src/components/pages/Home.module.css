@@ -48,6 +48,10 @@
     transform: scale(1.1);
 }
 
+.p_footer{
+    margin-top: 20px;
+}
+
 @media screen and (min-width: 0px) and (max-width: 576px) {
     .pet_item {
         min-width: 350px;
